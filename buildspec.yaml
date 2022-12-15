@@ -21,7 +21,7 @@ phases:
       - npm install
   build:
     commands:
-      - sed -i "s|localhost|"$MONGODB_URI"|" app.js
+      - sed -i "s|localhost|$MONGODB_URI|" app.js
       - echo Building ...
 
   post_build:
