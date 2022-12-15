@@ -1,0 +1,34 @@
+version: 0.2
+
+run-as: root
+
+env:
+  secrets-manager:
+    MONGODB_URI: "mongo-uri-chirag:MONGODB_URI"
+    Node_env: "mongo-uri-chirag:NODE_ENV"
+    secret: "mongo-uri-chirag:SECRET"
+    port: "mongo-uri-chirag:PORT"
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - echo Installing...
+  pre_build:
+    commands:
+      - echo Installing source NPM dependencies.
+      - npm install
+  build:
+    commands:
+      - sed -i "s|localhost|"$MONGODB_URI"|" app.js
+      - echo Building ...
+
+  post_build:
+    commands:
+      - echo Build complete
+
+artifacts:
+  files:
+    - '**/*'
+    - echo Uploaded Artifacts
