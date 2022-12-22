@@ -21,11 +21,18 @@ phases:
       - npm install
   build:
     commands:
-      - sed -i "s|localhost|$MONGODB_URI|" app.js
+#       - sed -i "s|localhost|$MONGODB_URI|" app.js
+      - echo "NODE_ENV=production" > .env
+      - echo "MONGODB_URI=$mongo_uri" >> .env
+      - echo "PORT=3000" >> .env
+      - echo "secret=$SECRET" >> .env
+      - cat .env
+      - ls -al
       - echo Building ...
 
   post_build:
     commands:
+      - cat app.js
       - echo Build complete
 
 artifacts:
