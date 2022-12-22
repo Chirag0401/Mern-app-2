@@ -3,7 +3,7 @@ os: linux
 
 files:
   - source: /
-    destination: /home/ubuntu/node-express-realworld-example-app
+    destination: /home/app/node-express-realworld-example-app
     overwrite: true
     timeout: 300
 
@@ -11,16 +11,16 @@ hooks:
   BeforeInstall:
     - location: scripts/install.sh
       timeout: 300
-      runas: root
+      runas: app
   ApplicationStop:
     - location: scripts/stop_script.sh
       timeout: 300
-      runas: root
+      runas: app
   ApplicationStart:
     - location: scripts/start_script.sh
       timeout: 300
-      runas: root
+      runas: app
   ValidateService:
     - location: scripts/validate_service.sh
       timeout: 300
-      runas: root
+      runas: app
